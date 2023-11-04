@@ -1,6 +1,11 @@
 > open to do list
+    >> * decide how user inputs to do list *
+        >>> spreadsheet saved as csv
+        >>> python console
+        >>> GUI
 > pull to do list
 > get info for each item
+    >> name
     >> date
     >> points
     >> type

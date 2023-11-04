@@ -16,6 +16,7 @@ def load_csv_file(state):
     data = pd.read_csv(state.path)
     print(data.columns)
 
+
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
 
@@ -61,8 +62,8 @@ scenario = tp.create_scenario(scenario_cfg)
 stylekit = {
     "color_primary": "#03045E",
     "color_secondary": "#0077B6",
-    "color_background_dark":"#48CAE4",
-    "color_background_light":"#ADE8F4",
+    "color_background_dark": "#48CAE4",
+    "color_background_light": "#ADE8F4",
 }
 
 Gui(page).run(stylekit=stylekit)
