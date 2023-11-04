@@ -30,6 +30,7 @@ message = None
 csv_node = None
 
 
+
 def submit_scenario(state):
     state.scenario.input_name.write(state.input_name)
     state.scenario.submit()
@@ -38,6 +39,14 @@ def submit_scenario(state):
 def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
 
+x_range = range(1, 6)
+data = {
+    "X": x_range,
+    "Y": [x*x for x in x_range]
+}
+
+column_orders = [("X;Y", "Squared"), ("Y;X", "Square root")]
+columns = column_orders[0]
 
 page = """
 <|container container-styling|
@@ -46,16 +55,20 @@ Homework Queue
 </center>
 |>
 
-Name: <|{input_name}|input|>
+<|{data}|table|columns={columns[0]}|show_all|>
+<|{columns}|toggle|lov={column_orders}|>
 
 
-<|submit|button|on_action=submit_scenario|>
+
+<center>
+<|file_selector|label=Upload Homework|drop_message=Drop file here|hover_text=Click here to insert file|extensions=.csv|on_action=submit_homework|>
+</center>
 
 
-<|file_selector|label=Upload Homework|drop_message=Drop file here|hover_text=|extensions=.csv|on_action=submit_homework|>
 
 
-Message: <|{message}|text|>
+
+
 """
 
 
