@@ -1,6 +1,5 @@
 import taipy as tp
 from taipy import Config, Core, Gui
-from taipy.gui import notify
 import pandas as pd
 pd.set_option('display.max_columns', None)
 
@@ -17,7 +16,7 @@ def load_csv_file(state):
     local_data = pd.read_csv(state.path)
     data["Assignment"] = local_data.iloc[:, 0]
     data['Weight']  = local_data.iloc[:, -1]
-
+    state.data = data
 
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
@@ -32,7 +31,10 @@ csv_node = None
 path = None
 
 x_range = range(1, 6)
-data = pd.DataFrame([["Please enter a ","CSV File"]], columns=["Assignment", "Weight"])
+data = {
+    "Assignment": ("Please Enter a "),
+    "Weight": ["CSV File"]
+}
 
 columns = "Assignment;Weight",
 
@@ -44,15 +46,15 @@ Homework Queue
 |>
 
 <center>
-<|data|table|columns={columns[0]}|show_all|width=1000px|>
+<|{data}|table|columns={columns[0]}|show_all|width=1000px|>
 <|{columns}|toggle|>
 </center>
 
 <center>
-<|Points|button|>
-<|Date|button|>
-<|Type|button|>
-<|Weights|button|>
+<|Date|button|id=choice_button|>
+<|Points|button|id=choice_button|>
+<|Type|button|id=choice_button|>
+<|Weights|button|id=choice_button|>
 </center>
 
 <center>
@@ -64,10 +66,10 @@ Core().run()
 scenario = tp.create_scenario(scenario_cfg)
 
 stylekit = {
-    "color_primary": "#03045E",
-    "color_secondary": "#0077B6",
-    "color_background_dark": "#48CAE4",
-    "color_background_light": "#ADE8F4",
+    "color_primary": "#CDB4DB",
+    "color_secondary": "#FFC8DD",
+    "color_background_dark": "#FFAFCC",
+    "color_background_light": "#A2d@FF",
 }
 
 Gui(page).run(stylekit=stylekit)
