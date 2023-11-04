@@ -13,8 +13,10 @@ def submit_scenario(state):
 def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
 def load_csv_file(state):
-    data = pd.read_csv(state.path)
-    print(data.columns)
+    local_data = pd.read_csv(state.path)
+    data["Assignment"] = local_data.iloc[:, 0]
+    data['Weight']  = local_data.iloc[:, -1]
+    state.data = data
 
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
@@ -30,11 +32,11 @@ path = None
 
 x_range = range(1, 6)
 data = {
-    "Assignment": x_range,
-    "Weight": [x*x for x in x_range]
+    "Assignment": ("Please Enter a "),
+    "Weight": ["CSV File"]
 }
 
-columns = "Assignment;Weight", "Squared"
+columns = "Assignment;Weight",
 
 page = """
 <|container container-styling|
@@ -43,13 +45,17 @@ Homework Queue
 </center>
 |>
 
-<|{data}|table|columns={columns[0]}|show_all|>
+<center>
+<|{data}|table|columns={columns[0]}|show_all|width=1000px|>
 <|{columns}|toggle|>
+</center>
 
+<center>
 <|Points|button|>
 <|Date|button|>
 <|Type|button|>
 <|Weights|button|>
+</center>
 
 <center>
 <|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
