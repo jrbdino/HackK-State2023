@@ -16,8 +16,13 @@
 > put class information into algorithm
 > put item information into algorithm
     >> put items in queue as is (by date)
-        >>> key will be assignment name
+        >>> key will be AssignmentName
+        >>> value will be either points, date, type, or weight
+        >>> as is default is by AssignmentName:Date
     >> put items in priority queue new way
+          >> key will be AssignmentName
+        >>> value will be either points, date, type, or weight
+
     >> have user choose which feature to use
         >>> date, points, type, weight
 > display priority queue
