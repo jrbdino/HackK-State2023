@@ -1,0 +1,21 @@
+> open to do list
+> pull to do list
+> get info for each item
+    >> date
+    >> points
+    >> type
+    >> weight
+> get info for each class
+    >> total class points
+    >> weight by type
+> put class information into algorithm
+> put item information into algorithm
+    >> put items in queue as is (by date)
+    >> put items in priority queue new way
+    >> have user choose which feature to use
+        >>> date, points, type, weight
+> display priority queue
+    >> GUI / intractable
+    >> each item on list can be checked off
+    >> remove item from list when checked off but temporarily store for undoing
+> display completion meter display
