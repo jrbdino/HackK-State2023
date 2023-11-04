@@ -1,6 +1,7 @@
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
+pd.set_option('display.max_columns', None)
 
 def build_message(name):
     return f"Hello {name}!"
@@ -13,7 +14,7 @@ def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
 def load_csv_file(state):
     data = pd.read_csv(state.path)
-    print(data)
+    print(data.columns)
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
@@ -50,7 +51,7 @@ Homework Queue
 <|Weights|button|>
 
 <center>
-<|{path}|file_selector|label=Upload dataset|on_action=load_csv_file|extensions=.csv|>
+<|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
 </center>
 """
 
