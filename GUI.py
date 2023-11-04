@@ -30,11 +30,11 @@ path = None
 
 x_range = range(1, 6)
 data = {
-    "X": x_range,
-    "Y": [x*x for x in x_range]
+    "Assignment": x_range,
+    "Weight": [x*x for x in x_range]
 }
 
-columns = "X;Y", "Squared"
+columns = "Assignment;Weight", "Squared"
 
 page = """
 <|container container-styling|
