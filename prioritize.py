@@ -8,8 +8,8 @@ def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
     point_weight = 1
     weight_weight = 0
 
-    priority = day_weight * dataframe['Days Left Till Due'] + point_weight * dataframe['Assignment_Points'] + weight_weight * \
-               dataframe['Assignment_Weight']
+    priority = day_weight * dataframe.iloc[:, 3] + point_weight * dataframe.iloc[:, 1] + weight_weight * \
+               dataframe.iloc[:, 2]
 
     dataframe['Priority'] = priority
     print(dataframe)
