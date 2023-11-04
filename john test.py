@@ -44,10 +44,15 @@ print(data)
 
 for index in range(len(data)):
     my_queue.add(data.iloc[index, 5], data.iloc[index, 0])
-    print(f'min:  {my_queue.min()}')
 
 
-
+prioritized_dict = {'Assignment_Name': [], 'Priority': []}
+for index in range(len(my_queue)):
+    key, value = my_queue.remove_min()
+    prioritized_dict['Assignment_Name'].append(value)
+    prioritized_dict['Priority'].append(key)
+prioritized_data = pd.DataFrame(prioritized_dict)
+print(prioritized_data)
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
