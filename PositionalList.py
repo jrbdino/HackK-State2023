@@ -1,3 +1,5 @@
+from DoublyLinkedBase import DoublyLinkedBase
+
 class PositionalList(_DoublyLinkedBase):
     class Position:
         def __init__(self, container, node):
