@@ -2,8 +2,8 @@ from SortedPriorityQueue import SortedPriorityQueue
 
 my_queue = SortedPriorityQueue()
 
-for item in my_queue._data:
-    print(item)
+for index in my_queue._data:
+    print(index)
 
 
 import taipy as tp
@@ -26,14 +26,28 @@ def load_csv_file(state):
 
 data = pd.read_csv("Test Homework File - Sheet1.csv")
 # print(data)
-for row in data.iterrows():
-    print(row[0], row[1])
-priority = 1 / (data['Assignment_Points'] / data['Total Points in Class(Including this assignment)'] *
-                data['Assignment_Weight'] * (1 / data['Days Left Till Due']))
+# for row in data.iterrows():
+#     print(row[0], row[1])
+# priority = 1 / (data['Assignment_Points'] / data['Total Points in Class(Including this assignment)'] *
+#                 data['Assignment_Weight'] * (1 / data['Days Left Till Due']))
+day_weight = 1
+point_weight = 1
+weight_weight = 0
+
+priority = day_weight * data['Days Left Till Due'] + point_weight * data['Assignment_Points'] + weight_weight * data['Assignment_Weight']
+
 
 
 data['Priority'] = priority
 print(data)
+
+
+for index in range(len(data)):
+    my_queue.add(data.iloc[index, 5], data.iloc[index, 0])
+    print(f'min:  {my_queue.min()}')
+
+
+
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
