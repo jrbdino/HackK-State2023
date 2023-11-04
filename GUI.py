@@ -51,8 +51,8 @@ Homework Queue
 </center>
 
 <center>
-<|Points|button|>
 <|Date|button|>
+<|Points|button|>
 <|Type|button|>
 <|Weights|button|>
 </center>
