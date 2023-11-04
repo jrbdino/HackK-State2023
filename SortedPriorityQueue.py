@@ -1,6 +1,7 @@
 from PriorityQueueBase import PriorityQueueBase
 from PositionalList import PositionalList
 
+
 class SortedPriorityQueue(PriorityQueueBase):
     def __init__(self):
         self._data = PositionalList()
@@ -11,7 +12,7 @@ class SortedPriorityQueue(PriorityQueueBase):
     def add(self, key, value):
         newest = self._Item(key, value)
         walk = self._data.last()
-        while walk is not None and nesert < walk.element():
+        while walk is not None and newest < walk.element():
             walk = self._data.before(walk)
         if walk is None:
             self._data.add_first(newest)
