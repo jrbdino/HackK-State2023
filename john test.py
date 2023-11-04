@@ -1,58 +1,58 @@
 from SortedPriorityQueue import SortedPriorityQueue
-
-my_queue = SortedPriorityQueue()
-
-for index in my_queue._data:
-    print(index)
-
-
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
-pd.set_option('display.max_columns', None)
+from prioritize import prioritize
 
 def build_message(name):
     return f"Hello {name}!"
+
 
 def submit_scenario(state):
     state.scenario.input_name.write(state.input_name)
     state.scenario.submit()
     state.message = scenario.message.read()
+
+
 def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
+
+
 def load_csv_file(state):
     data = pd.read_csv(state.path)
     print(data.columns)
 
+
+# def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
+#     my_queue = SortedPriorityQueue()
+#     day_weight = 1
+#     point_weight = 1
+#     weight_weight = 0
+#
+#     priority = day_weight * data['Days Left Till Due'] + point_weight * data['Assignment_Points'] + weight_weight * \
+#                data['Assignment_Weight']
+#
+#     data['Priority'] = priority
+#     print(data)
+#
+#     for index in range(len(data)):
+#         my_queue.add(data.iloc[index, 5], data.iloc[index, 0])
+#
+#     prioritized_dict = {'Assignment_Name': [], 'Priority': []}
+#     for index in range(len(my_queue)):
+#         key, value = my_queue.remove_min()
+#         prioritized_dict['Assignment_Name'].append(value)
+#         prioritized_dict['Priority'].append(key)
+#     return pd.DataFrame(prioritized_dict)
+
+
+pd.set_option('display.max_columns', None)
+
 data = pd.read_csv("Test Homework File - Sheet1.csv")
-# print(data)
-# for row in data.iterrows():
-#     print(row[0], row[1])
-# priority = 1 / (data['Assignment_Points'] / data['Total Points in Class(Including this assignment)'] *
-#                 data['Assignment_Weight'] * (1 / data['Days Left Till Due']))
-day_weight = 1
-point_weight = 1
-weight_weight = 0
 
-priority = day_weight * data['Days Left Till Due'] + point_weight * data['Assignment_Points'] + weight_weight * data['Assignment_Weight']
-
-
-
-data['Priority'] = priority
+data = prioritize(data)
 print(data)
 
-
-for index in range(len(data)):
-    my_queue.add(data.iloc[index, 5], data.iloc[index, 0])
-
-
-prioritized_dict = {'Assignment_Name': [], 'Priority': []}
-for index in range(len(my_queue)):
-    key, value = my_queue.remove_min()
-    prioritized_dict['Assignment_Name'].append(value)
-    prioritized_dict['Priority'].append(key)
-prioritized_data = pd.DataFrame(prioritized_dict)
-print(prioritized_data)
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")

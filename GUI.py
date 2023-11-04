@@ -1,23 +1,31 @@
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
-pd.set_option('display.max_columns', None)
+from prioritize import prioritize
+
 
 def build_message(name):
     return f"Hello {name}!"
+
 
 def submit_scenario(state):
     state.scenario.input_name.write(state.input_name)
     state.scenario.submit()
     state.message = scenario.message.read()
+
+
 def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
+
+
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
     data["Assignment"] = local_data.iloc[:, 0]
-    data['Weight']  = local_data.iloc[:, -1]
+    data['Weight'] = local_data.iloc[:, -1]
     state.data = data
 
+
+pd.set_option('display.max_columns', None)
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
