@@ -12,8 +12,8 @@ def submit_homework(state):
 
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
-    data["Assignment"] = local_data.iloc[:, 0]
-    data['Difficulty'] = local_data.iloc[:, -1]
+    data["Assignment"] = data['Assignment'].replace([data.iloc[:, 0]],[local_data.iloc[:, 0]])
+    data['Weight'] = data['Weight'].replace([data.iloc[:, -1]],[local_data.iloc[:, -1]])
     state.data = data
 
 def delete_row(state, var_name, action, payload):

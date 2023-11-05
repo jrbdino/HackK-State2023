@@ -12,16 +12,15 @@ def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
 
     today_date = pd.Timestamp(datetime.datetime.today())
     dataframe['Due Date'] = pd.to_datetime(dataframe['Due Date'])
-    print(dataframe)
 
     dataframe['Days Left'] = (dataframe['Due Date'] - today_date).dt.days
-    print(dataframe)
 
     priority = 1 / (day_weight * dataframe.iloc[:, 5] + grade_weight * dataframe.iloc[:, 3] + difficulty_weight *
                     dataframe.iloc[:, 4])
 
     dataframe['Priority'] = priority
-    print(dataframe)
+    # formula needs adjustment to prioritize correctly
+    # print(dataframe)
 
     for index in range(len(dataframe)):
         my_queue.add(dataframe.iloc[index, 5], dataframe.iloc[index, 0])
