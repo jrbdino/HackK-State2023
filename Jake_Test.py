@@ -20,7 +20,8 @@ def load_csv_file(state):
     print(new_data)
     # Replace the "Assignment" and "Weight" columns in state.data with the new data
     state.data[["Assignment", "Weight"]] = new_data
-    print(state.data)
+    #print(state.data)
+    state.data = new_data
 
 
 def delete_row(state, var_name, action, payload):
@@ -38,7 +39,7 @@ csv_node = None
 path = None
 
 
-data = pd.DataFrame({"Assignment": ["Please Enter a "], "Weight": ["CSV File"]})
+data = pd.DataFrame({"Assignment": ["Please Enter a ",0,0,0,0,0,0,0,0,0,0,0,0], "Weight": ["CSV File",0,0,0,0,0,0,0,0,0,0,0,0]})
 
 page = """
 <|container container-styling|
