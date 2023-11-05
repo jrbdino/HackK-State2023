@@ -24,7 +24,7 @@ def load_csv_file(state):
     data['Weight'] = local_data.iloc[:, -1]
     state.data = data
 
-data = pd.read_csv('Test Homework File - Sheet1 (1).csv')
+data = pd.read_csv('Test Homework File.csv')
 prioritize(data)
 
 pd.set_option('display.max_columns', None)
