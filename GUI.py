@@ -23,6 +23,7 @@ def load_csv_file(state):
     data["Assignment"] = local_data.iloc[:, 0]
     data['Weight'] = local_data.iloc[:, -1]
     state.data = data
+    print(state.data)
 
 
 pd.set_option('display.max_columns', None)

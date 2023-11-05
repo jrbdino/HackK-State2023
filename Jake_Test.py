@@ -1,5 +1,5 @@
 import taipy as tp
-from taipy import Config, Core, Gui
+from taipy import Core, Gui
 from taipy.gui import notify
 import pandas as pd
 
@@ -11,9 +11,17 @@ def submit_homework(state):
 
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
-    data["Assignment"] = data['Assignment'].replace([data.iloc[:, 0]], [local_data.iloc[:, 0]])
-    data['Weight'] = data['Weight'].replace([data.iloc[:, -1]], [local_data.iloc[:, -1]])
-    state.data = data
+
+    # Create a new DataFrame with the first and last columns from the loaded data
+    new_data = pd.DataFrame({
+        "Assignment": local_data.iloc[:, 0],
+        "Weight": local_data.iloc[:, -1]
+    })
+    print(new_data)
+    # Replace the "Assignment" and "Weight" columns in state.data with the new data
+    state.data[["Assignment", "Weight"]] = new_data
+    print(state.data)
+
 
 def delete_row(state, var_name, action, payload):
     old = payload["index"]
