@@ -21,7 +21,7 @@ data = pd.DataFrame({"Assignment": ["Please Enter a ",0,0,0,0,0,0,0,0,0,0,0,0], 
 page = """
 <|container container-styling|
 <center>
-Homework Queue 
+Homework Priority Queue 
 </center>
 |>
 
@@ -30,15 +30,15 @@ Homework Queue
 </center>
 
 <center>
-<|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
+<|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Upload Homework|>
 </center>
 """
 Core().run()
 
 stylekit = {
-    "color_primary": "#03045E",
-    "color_secondary": "#0077B6",
-    "color_background_dark": "#48CAE4",
-    "color_background_light": "#ADE8F4",
+    "color_primary": "#1B4965",
+    "color_secondary": "#62B6CB",
+    "color_background_dark": "#5FA8D3",
+    "color_background_light": "#CAE9FF",
 }
 Gui(page).run(stylekit=stylekit)
