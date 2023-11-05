@@ -1,18 +1,10 @@
 import taipy as tp
 from taipy import Config, Core, Gui
+
 import pandas as pd
+from taipy.gui import notify
+
 from prioritize import prioritize
-
-
-def build_message(name):
-    return f"Hello {name}!"
-
-
-def submit_scenario(state):
-    state.scenario.input_name.write(state.input_name)
-    state.scenario.submit()
-    state.message = scenario.message.read()
-
 
 def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
@@ -21,22 +13,17 @@ def submit_homework(state):
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
     data["Assignment"] = local_data.iloc[:, 0]
-    data['Weight'] = local_data.iloc[:, -1]
+    data['Difficulty'] = local_data.iloc[:, -1]
     state.data = data
 
 def delete_row(state, var_name, action, payload):
-    old  = payload["index"]
+    old = payload["index"]
     state.data = state.data.drop(index=old)
-
+    notify(state, "E", f"Deleted row at index '{old}'")
 
 
 pd.set_option('display.max_columns', None)
 
-input_name_data_node_cfg = Config.configure_data_node(id="input_name")
-message_data_node_cfg = Config.configure_data_node(id="message")
-
-build_msg_task_cfg = Config.configure_task("build_msg", build_message, input_name_data_node_cfg, message_data_node_cfg)
-scenario_cfg = Config.configure_scenario("scenario", task_configs=[build_msg_task_cfg])
 
 input_name = "Taipy"
 message = None
@@ -44,12 +31,7 @@ csv_node = None
 path = None
 
 
-data = {
-    "Assignment": ("Please Enter a "),
-    "Weight": ["CSV File"]
-}
-
-columns = "Assignment;Weight",
+data = pd.DataFrame({"Assignment": ["Please Enter a "], "Weight": ["CSV File"],})
 
 page = """
 <|container container-styling|
@@ -59,8 +41,7 @@ Homework Queue
 |>
 
 <center>
-<|{data}|table|columns={columns[0]}|show_all|width=1000px|on_delete=delete_row|>
-<|{columns}|toggle|>
+<|{data}|table|show_all|width=1000px|on_delete=delete_row|>
 </center>
 
 <center>
@@ -76,7 +57,6 @@ Homework Queue
 """
 
 Core().run()
-scenario = tp.create_scenario(scenario_cfg)
 
 stylekit = {
     "color_primary": "#03045E",
