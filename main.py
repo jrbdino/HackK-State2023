@@ -9,14 +9,14 @@ def load_csv_file(state):
     local_data = prioritize(local_data)
     new_data = pd.DataFrame({
         "Assignment": local_data.iloc[:, 0],
-        "Weight": local_data.iloc[:, -1]
+        "Priority": local_data.iloc[:, -1]
     })
-    state.data[["Assignment", "Weight"]] = new_data
+    state.data[["Assignment", "Priority"]] = new_data
     state.data = new_data
 
 path = None
 
-data = pd.DataFrame({"Assignment": ["Please Enter a ",0,0,0,0,0,0,0,0,0,0,0,0], "Weight": ["CSV File",0,0,0,0,0,0,0,0,0,0,0,0]})
+data = pd.DataFrame({"Assignment": ["Please Enter a ",0,0,0,0,0,0,0,0,0,0,0,0], "Priority": ["CSV File",0,0,0,0,0,0,0,0,0,0,0,0]})
 
 page = """
 <|container container-styling|
