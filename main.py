@@ -1,9 +1,10 @@
-
 from taipy import Core, Gui
 import pandas as pd
 from prioritize import prioritize
 
 pd.set_option('display.max_columns', None)
+
+
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
     local_data = prioritize(local_data)
@@ -14,9 +15,11 @@ def load_csv_file(state):
     state.data[["Assignment", "Priority"]] = new_data
     state.data = new_data
 
+
 path = None
 
-data = pd.DataFrame({"Assignment": ["Please Enter a ",0,0,0,0,0,0,0,0,0,0,0,0], "Priority": ["CSV File",0,0,0,0,0,0,0,0,0,0,0,0]})
+data = pd.DataFrame({"Assignment": ["Please Enter a ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     "Priority": ["CSV File", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]})
 
 page = """
 <|container container-styling|
