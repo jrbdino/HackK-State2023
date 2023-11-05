@@ -1,8 +1,7 @@
 import taipy as tp
 from taipy import Config, Core, Gui
-
-import pandas as pd
 from taipy.gui import notify
+import pandas as pd
 
 from prioritize import prioritize
 
@@ -12,8 +11,8 @@ def submit_homework(state):
 
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
-    data["Assignment"] = data['Assignment'].replace([data.iloc[:, 0]],[local_data.iloc[:, 0]])
-    data['Weight'] = data['Weight'].replace([data.iloc[:, -1]],[local_data.iloc[:, -1]])
+    data["Assignment"] = data['Assignment'].replace([data.iloc[:, 0]], [local_data.iloc[:, 0]])
+    data['Weight'] = data['Weight'].replace([data.iloc[:, -1]], [local_data.iloc[:, -1]])
     state.data = data
 
 def delete_row(state, var_name, action, payload):
@@ -31,7 +30,7 @@ csv_node = None
 path = None
 
 
-data = pd.DataFrame({"Assignment": ["Please Enter a "], "Weight": ["CSV File"],})
+data = pd.DataFrame({"Assignment": ["Please Enter a "], "Weight": ["CSV File"]})
 
 page = """
 <|container container-styling|
