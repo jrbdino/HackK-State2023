@@ -74,10 +74,10 @@ Core().run()
 scenario = tp.create_scenario(scenario_cfg)
 
 stylekit = {
-    "color_primary": "#03045E",
-    "color_secondary": "#0077B6",
-    "color_background_dark": "#48CAE4",
-    "color_background_light": "#ADE8F4",
+    "color_primary": "#1B4965",
+    "color_secondary": "#BEE9E8",
+    "color_background_dark": "#5FA8D3",
+    "color_background_light": "#62B6CB",
 }
 
 Gui(page).run(stylekit=stylekit)
