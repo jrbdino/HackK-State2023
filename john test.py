@@ -1,8 +1,8 @@
-from SortedPriorityQueue import SortedPriorityQueue
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
 from prioritize import prioritize
+
 
 def build_message(name):
     return f"Hello {name}!"
@@ -19,40 +19,15 @@ def submit_homework(state):
 
 
 def load_csv_file(state):
-    data = pd.read_csv(state.path)
-    print(data.columns)
+    local_data = pd.read_csv(state.path)
+    data["Assignment"] = local_data.iloc[:, 0]
+    data['Weight'] = local_data.iloc[:, -1]
+    state.data = data
 
-
-# def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
-#     my_queue = SortedPriorityQueue()
-#     day_weight = 1
-#     point_weight = 1
-#     weight_weight = 0
-#
-#     priority = day_weight * data['Days Left Till Due'] + point_weight * data['Assignment_Points'] + weight_weight * \
-#                data['Assignment_Weight']
-#
-#     data['Priority'] = priority
-#     print(data)
-#
-#     for index in range(len(data)):
-#         my_queue.add(data.iloc[index, 5], data.iloc[index, 0])
-#
-#     prioritized_dict = {'Assignment_Name': [], 'Priority': []}
-#     for index in range(len(my_queue)):
-#         key, value = my_queue.remove_min()
-#         prioritized_dict['Assignment_Name'].append(value)
-#         prioritized_dict['Priority'].append(key)
-#     return pd.DataFrame(prioritized_dict)
-
+data = pd.read_csv('Test Homework File - Sheet1 (1).csv')
+prioritize(data)
 
 pd.set_option('display.max_columns', None)
-
-data = pd.read_csv("Test Homework File - Sheet1.csv")
-
-data = prioritize(data)
-print(data)
-
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
@@ -67,11 +42,11 @@ path = None
 
 x_range = range(1, 6)
 data = {
-    "Assignment": x_range,
-    "Weight": [x*x for x in x_range]
+    "Assignment": ("Please Enter a "),
+    "Weight": ["CSV File"]
 }
 
-columns = "Assignment;Weight", "Squared"
+columns = "Assignment;Weight",
 
 page = """
 <|container container-styling|
@@ -80,13 +55,17 @@ Homework Queue
 </center>
 |>
 
-<|{data}|table|columns={columns[0]}|show_all|>
+<center>
+<|{data}|table|columns={columns[0]}|show_all|width=1000px|>
 <|{columns}|toggle|>
+</center>
 
-<|Points|button|>
+<center>
 <|Date|button|>
+<|Points|button|>
 <|Type|button|>
 <|Weights|button|>
+</center>
 
 <center>
 <|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
