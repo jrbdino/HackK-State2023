@@ -1,0 +1,17 @@
+.container-styling{
+    background-color: #62B6CB;
+    color: #1B4965;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    /*margin: auto;*/
+    padding: 5px;
+    font-size: 50px;
+    border-radius: 10px;
+    width: 1000px;
+}
+
+.container-file{
+    color: #5FA8D3;
+
+}
