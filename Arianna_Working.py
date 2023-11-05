@@ -65,8 +65,8 @@ path = None
 
 x_range = range(1, 6)
 data = {
-    "Assignment": ("Please Enter a "),
-    "Weight": ["CSV File"]
+    "Assignment Name": ("Please click the 'Upload Homework' button below to start the program."),
+    "Priority": ["CSV File"]
 }
 
 columns = "Assignment;Weight",
@@ -104,6 +104,7 @@ stylekit = {
     "color_background_dark": "#48CAE4",
     "color_background_light": "#ADE8F4",
 }
+
 main_md = Markdown("""
 # Daily Calorie Tracker""")
 Gui(page).run(stylekit=stylekit)
