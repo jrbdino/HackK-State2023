@@ -1,25 +1,36 @@
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
-pd.set_option('display.max_columns', None)
-from prioritize import prioritize as pz
+from prioritize import prioritize
+
 
 def build_message(name):
     return f"Hello {name}!"
+
 
 def submit_scenario(state):
     state.scenario.input_name.write(state.input_name)
     state.scenario.submit()
     state.message = scenario.message.read()
+
+
 def submit_homework(state):
     state.scenario.csv_node.write(state.csv_node)
+
+
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
-    local_data = pz(local_data)
     data["Assignment"] = local_data.iloc[:, 0]
-    data['Weight']  = local_data.iloc[:, -1]
+    data['Weight'] = local_data.iloc[:, -1]
     state.data = data
 
+def delete_row(state, var_name, action, payload):
+    old  = payload["index"]
+    state.data = state.data.drop(index=old)
+
+
+
+pd.set_option('display.max_columns', None)
 
 input_name_data_node_cfg = Config.configure_data_node(id="input_name")
 message_data_node_cfg = Config.configure_data_node(id="message")
@@ -32,7 +43,7 @@ message = None
 csv_node = None
 path = None
 
-x_range = range(1, 6)
+
 data = {
     "Assignment": ("Please Enter a "),
     "Weight": ["CSV File"]
@@ -48,15 +59,15 @@ Homework Queue
 |>
 
 <center>
-<|{data}|table|columns={columns[0]}|show_all|width=1000px|>
+<|{data}|table|columns={columns[0]}|show_all|width=1000px|on_delete=delete_row|>
 <|{columns}|toggle|>
 </center>
 
 <center>
-<|Date|button|id=choice_button|>
-<|Points|button|id=choice_button|>
-<|Type|button|id=choice_button|>
-<|Weights|button|id=choice_button|>
+<|Date|button|>
+<|Points|button|>
+<|Type|button|>
+<|Weights|button|>
 </center>
 
 <center>
@@ -68,12 +79,10 @@ Core().run()
 scenario = tp.create_scenario(scenario_cfg)
 
 stylekit = {
-    "color_primary": "#CDB4DB",
-    "color_secondary": "#FFC8DD",
-    "color_background_dark": "#FFAFCC",
-    "color_background_light": "#A2d@FF",
+    "color_primary": "#03045E",
+    "color_secondary": "#0077B6",
+    "color_background_dark": "#48CAE4",
+    "color_background_light": "#ADE8F4",
 }
 
 Gui(page).run(stylekit=stylekit)
-
-
