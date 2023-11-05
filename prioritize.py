@@ -30,4 +30,7 @@ def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
         key, value = my_queue.remove_min()
         prioritized_dict['Assignment_Name'].append(value)
         prioritized_dict['Priority'].append(key)
-    return pd.DataFrame(prioritized_dict)
+
+    priority_frame = pd.DataFrame(prioritized_dict)
+    priority_frame['Priority'] = range(1, len(priority_frame) + 1)
+    return priority_frame
