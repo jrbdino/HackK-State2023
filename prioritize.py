@@ -19,8 +19,6 @@ def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
                     dataframe.iloc[:, 4])
 
     dataframe['Priority'] = priority
-    # formula needs adjustment to prioritize correctly
-    # print(dataframe)
 
     for index in range(len(dataframe)):
         my_queue.add(dataframe.iloc[index, 5], dataframe.iloc[index, 0])
