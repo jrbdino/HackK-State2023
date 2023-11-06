@@ -83,8 +83,8 @@ stylekit = {
 
 tablestyle = {
     "font-family": "Consolas,monaco,monospace",
-}
 
+}
 
 
 

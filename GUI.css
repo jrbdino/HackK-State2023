@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Martian+Mono:wght@500&display=swap');
+
 .container-styling{
     background-color: #62B6CB;
     color: #1B4965;
@@ -9,7 +12,7 @@
     font-size: 50px;
     border-radius: 10px;
     width: 1000px;
-    font-family: fantasy;
+    font-family: 'Comfortaa', sans-serif;
 }
 
 .container-file{
