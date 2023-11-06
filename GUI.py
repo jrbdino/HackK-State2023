@@ -50,12 +50,12 @@ columns = "Assignment;Weight",
 page = """
 <|container container-styling|
 <center>
-Homework Queue 
+Tai Your Life Together
 </center>
 |>
 
 <center>
-<|{data}|table|columns={columns[0]}|show_all|width=1000px|>
+<|{data}|table|columns={columns[0]}|show_all|width=1000px|style=tablestyle|>
 <|{columns}|toggle|>
 </center>
 
@@ -81,4 +81,11 @@ stylekit = {
     "color_background_light": "#62B6CB",
 }
 
-Gui(page).run(stylekit=stylekit)
+tablestyle = {
+    "font-family": "Consolas,monaco,monospace",
+}
+
+
+
+
+Gui(page).run(stylekit=stylekit,title="Tai your Life Together")
