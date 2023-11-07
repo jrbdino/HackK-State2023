@@ -1,14 +1,15 @@
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
-from prioritize import prioritize
+from prioritize import prioritize as pr
+
 
 #File Settings
 pd.set_option('display.max_columns', None)
 
 #Variables
 data = {
-    "Assignment": "Please Enter a ",
+    "Assignment": ["Please Enter a "],
     "Weight": ["CSV File"]
 }
 
@@ -17,13 +18,15 @@ path = None
 
 dark_mode = "container-styling_dark"
 light_mode = "container-styling_light"
-mode = light_mode
+mode = dark_mode
 
+file_name = "Template"
 content = "Homework Template.xlsx"
 
 #Functions
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
+    local_data = pr(local_data)
     data["Assignment"] = local_data.iloc[:, 0]
     data['Weight'] = local_data.iloc[:, -1]
     state.data = data
@@ -34,12 +37,14 @@ p1_kit = {
     "color_secondary": "#BEE9E8",
     "color_background_dark": "#102a43",
     "color_background_light": "#ffffff",
+    "font-family": "Comfortaa, sans-serif",
 }
 
 t1_kit = {
-    "font-family": "Consolas,monaco,monospace",
+    "font-family": "Comfortaa, sans-serif",
     "border-radius": "20px",
     "color_background_light": "#9bd4e4",
+    "text-align": "center",
 }
 
 #HTML Style Webpage
@@ -65,12 +70,11 @@ p1 = """
 </center>
 
 <center>
-    <|{content}|file_download|label=Download Template|name=Template|bypass_preview=False|>
+    <|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
 </center>
 
-
 <center>
-    <|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
+    <|{content}|file_download|label=Download Template|name={file_name}|bypass_preview=False|>
 </center>
 """
 
