@@ -83,7 +83,7 @@ stylekit = {
 
 tablestyle = {
     "font-family": "Consolas,monaco,monospace",
-
+    "border-radius": "20px",
 }
 
 
