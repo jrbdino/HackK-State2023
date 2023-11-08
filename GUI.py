@@ -8,12 +8,12 @@ from prioritize import prioritize as pr
 pd.set_option('display.max_columns', None)
 
 #Variables
-data = {
+data = pd.DataFrame({
     "Assignment": ["Please Enter a "],
     "Weight": ["CSV File"]
-}
+})
 
-columns = "Assignment;Weight",
+#columns = "Assignment;Weight",
 path = None
 
 dark_mode = "container-styling_dark"
@@ -58,8 +58,7 @@ p1 = """
 |>
 
 <center>
-    <|{data}|table|columns={columns[0]}|show_all|width=1000px|style=t1_kit|page_size=10|>
-    <|{columns}|toggle|>
+    <|{data}|table|show_all|width=1000px|style=t1_kit|page_size=10|>
 </center>
 
 <center>
