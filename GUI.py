@@ -8,10 +8,10 @@ from prioritize import prioritize as pr
 pd.set_option('display.max_columns', None)
 
 #Variables
-data = pd.DataFrame({
+data = {
     "Assignment": ["Please Enter a "],
     "Weight": ["CSV File"]
-})
+}
 
 #columns = "Assignment;Weight",
 path = None

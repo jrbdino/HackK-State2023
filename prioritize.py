@@ -4,11 +4,22 @@ import pandas as pd
 from SortedPriorityQueue import SortedPriorityQueue
 
 
-def prioritize(dataframe: pd.DataFrame) -> pd.DataFrame:
+def prioritize(dataframe: pd.DataFrame, priority_type: int) -> pd.DataFrame:
     my_queue = SortedPriorityQueue()
-    day_weight = 0.2
-    grade_weight = 1
-    difficulty_weight = 0.2
+
+    # 1=grade, 2=day, 3=difficulty
+    if priority_type == 1:
+        grade_weight = 1
+        day_weight = 0.2
+        difficulty_weight = 0.2
+    elif priority_type == 2:
+        grade_weight = 0.2
+        day_weight = 1
+        difficulty_weight = 0.2
+    elif priority_type == 3:
+        grade_weight = 0.2
+        day_weight = 0.2
+        difficulty_weight = 1
 
     today_date = pd.Timestamp(datetime.datetime.today())
     dataframe['Due Date'] = pd.to_datetime(dataframe['Due Date'])
