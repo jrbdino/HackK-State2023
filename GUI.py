@@ -62,17 +62,17 @@ p1 = """
 </center>
 
 <center>
-    <|Grade|button|>
-    <|Date|button|>
-    <|Difficulty|button|>
+    <|Grade|button|hover_text=Grade|>
+    <|Date|button|hover_text=Date|>
+    <|Difficulty|button|hover_text=Difficulty|>
 </center>
 
 <center>
-    <|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Load Homework|>
+    <|{path}|file_selector|label=Upload Homework|on_action=load_csv_file|extensions=.csv|hover_text=Upload Homework|>
 </center>
 
 <center>
-    <|{content}|file_download|label=Download Template|name={file_name}|bypass_preview=False|>
+    <|{content}|file_download|label=Download Template|name={file_name}|bypass_preview=False|hover_text=Download Template|>
 </center>
 """
 
