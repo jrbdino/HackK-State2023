@@ -4,7 +4,7 @@ import pandas as pd
 from SortedPriorityQueue import SortedPriorityQueue
 
 
-def prioritize(dataframe: pd.DataFrame, priority_type: int) -> pd.DataFrame:
+def prioritize(dataframe: pd.DataFrame, priority_type: int = 1) -> pd.DataFrame:
     my_queue = SortedPriorityQueue()
 
     # 1=grade, 2=day, 3=difficulty
