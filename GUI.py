@@ -10,10 +10,10 @@ pd.set_option('display.max_columns', None)
 #Variables
 data = {
     "Assignment": ["Please Enter a "],
-    "Weight": ["CSV File"]
+    "Priority": ["CSV File"]
 }
 
-#columns = "Assignment;Weight",
+#columns = "Assignment;Priority",
 path = None
 
 dark_mode = "container-styling_dark"
@@ -28,7 +28,7 @@ def load_csv_file(state):
     local_data = pd.read_csv(state.path)
     local_data = pr(local_data)
     data["Assignment"] = local_data.iloc[:, 0]
-    data['Weight'] = local_data.iloc[:, -1]
+    data["Priority"] = local_data.iloc[:, -1]
     state.data = data
 
 #CSS Styling
@@ -62,10 +62,9 @@ p1 = """
 </center>
 
 <center>
+    <|Grade|button|>
     <|Date|button|>
-    <|Points|button|>
-    <|Type|button|>
-    <|Weights|button|>
+    <|Difficulty|button|>
 </center>
 
 <center>
