@@ -1,3 +1,5 @@
+import time
+
 import taipy as tp
 from taipy import Config, Core, Gui
 import pandas as pd
@@ -12,6 +14,7 @@ data = {
     "Assignment": ["Please Enter a "],
     "Priority": ["CSV File"]
 }
+time_comp = 0
 
 #columns = "Assignment;Priority",
 path = None
@@ -26,7 +29,13 @@ content = "Homework Template.xlsx"
 #Functions
 def load_csv_file(state):
     local_data = pd.read_csv(state.path)
+    start_time = time.time()
     local_data = pr(local_data)
+    end_time = time.time()
+    global time_comp
+    time_comp = end_time - start_time
+    time_comp = f"{time_comp} seconds"
+    print(time_comp)
     data["Assignment"] = local_data.iloc[:, 0]
     data["Priority"] = local_data.iloc[:, -1]
     state.data = data
