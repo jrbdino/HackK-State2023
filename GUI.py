@@ -13,9 +13,16 @@ data = {
     "Assignment": ["Please Enter a "],
     "Priority": ["CSV File"]
 }
+
+saved_format = {
+    "Assignment": ["Please Enter a "],
+    "Priority": ["CSV File"]
+}
+
+loaded_data = None
+
 time_comp = 0
 
-#columns = "Assignment;Priority",
 path = None
 
 dark_mode = "container-styling_dark"
@@ -28,14 +35,19 @@ file_name = "Template"
 content = "Homework Template.xlsx"
 curr_date = datetime.datetime.now().strftime('%m/%d/%Y')
 p_type = 1
+w_type = "Grade"
 
 #Functions
 def load_csv_file(state):
+    global loaded_data
+    global time_comp
+    global path
+
     local_data = pd.read_csv(state.path)
+    loaded_data = pd.read_csv(state.path)
     start_time = time.time()
     local_data = pr(local_data, p_type)
     end_time = time.time()
-    global time_comp
     time_comp = end_time - start_time
     #time_comp = f"{time_comp} seconds"
     print(time_comp)
@@ -44,16 +56,38 @@ def load_csv_file(state):
     state.data = data
     state.time_comp = time_comp
     state.curr_date = datetime.datetime.now().strftime('%m/%d/%Y')
-def set_grade():
-    global p_type
-    p_type = 1
-def set_date():
-    global p_type
-    p_type = 2
+    path = None
 
-def set_difficulty():
+
+def reload_csv_file(state):
+    global loaded_data
+    local_data = pr(loaded_data, p_type)
+    data["Assignment"] = local_data.iloc[:, 0]
+    data["Priority"] = local_data.iloc[:, -1]
+    state.data = data
+
+def what_type(priority_type):
+    if priority_type == 1: return "Grade"
+    elif priority_type == 2: return "Date"
+    elif priority_type == 3: return "Difficulty"
+def set_grade(state):
     global p_type
+    global w_type
+    p_type = 1
+    state.w_type = what_type(p_type)
+
+def set_date(state):
+    global p_type
+    global w_type
+    p_type = 2
+    state.w_type = what_type(p_type)
+
+def set_difficulty(state):
+    global p_type
+    global w_type
     p_type = 3
+    state.w_type = what_type(p_type)
+
 
 #CSS Styling
 p1_kit = {
@@ -99,6 +133,10 @@ p1 = """
     <|Grade|button|hover_text=Grade|on_action=set_grade|>
     <|Date|button|hover_text=Date|on_action=set_date|>
     <|Difficulty|button|hover_text=Difficulty|on_action=set_difficulty|>
+</center>
+
+<center>
+    <|Prioritizing by: {w_type}|button|hover_text=Prioritizing by: {w_type}|>
 </center>
 
 <center>

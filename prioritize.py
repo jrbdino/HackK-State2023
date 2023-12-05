@@ -4,7 +4,7 @@ import pandas as pd
 from SortedPriorityQueue import SortedPriorityQueue
 
 
-def prioritize(dataframe: pd.DataFrame, priority_type: int = 1) -> pd.DataFrame:
+def prioritize(dataframe: pd.DataFrame, priority_type: int) -> pd.DataFrame:
     my_queue = SortedPriorityQueue()
 
     # 1=grade, 2=day, 3=difficulty
@@ -12,10 +12,12 @@ def prioritize(dataframe: pd.DataFrame, priority_type: int = 1) -> pd.DataFrame:
         grade_weight = 1
         day_weight = 0.2
         difficulty_weight = 0.2
+
     elif priority_type == 2:
         grade_weight = 0.2
         day_weight = 1
         difficulty_weight = 0.2
+
     elif priority_type == 3:
         grade_weight = 0.2
         day_weight = 0.2
@@ -26,8 +28,8 @@ def prioritize(dataframe: pd.DataFrame, priority_type: int = 1) -> pd.DataFrame:
 
     dataframe['Days Left'] = (dataframe['Due Date'] - today_date).dt.days
 
-    priority = 1 / (day_weight * dataframe.iloc[:, 5] + grade_weight * dataframe.iloc[:, 3] + difficulty_weight *
-                    dataframe.iloc[:, 4])
+    priority = 1 / ((day_weight * dataframe.iloc[:, 5]) + (grade_weight * dataframe.iloc[:, 3]) + (difficulty_weight *
+                    dataframe.iloc[:, 4]))
 
     dataframe['Priority'] = priority
 
