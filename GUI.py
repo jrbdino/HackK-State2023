@@ -107,12 +107,11 @@ t1_kit = {
 
 #HTML Style Webpage
 p1 = """
-
 <|container {logo}|
 <|{calendar}|image|hover_text=Head Empty == True|width=100px|>
 |>
-<|Current Date: {curr_date}|button|>
 
+<|Current Date: {curr_date}|button|>
 <|toggle|theme|>
 
 <|
@@ -120,8 +119,6 @@ p1 = """
 <center>
     Tai Your Life Together
 </center>
-
-
 |>
 |>
 
