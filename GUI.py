@@ -115,4 +115,4 @@ p1 = """
 
 """
 
-Gui(p1).run(stylekit=p1_kit, title="Tai your Life Together")
+Gui(p1).run(stylekit=p1_kit, title="Tai Your Life Together")
